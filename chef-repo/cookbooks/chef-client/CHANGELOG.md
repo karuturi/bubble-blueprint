@@ -2,6 +2,33 @@
 
 This file is used to list changes made in each version of the chef-client cookbook.
 
+## v4.6.0 (2016-06-01)
+
+- Add systemd support to Suse platforms and make systemd the default there as systemd is the init system on all supported suse platforms
+- Added a serverspec test for systemd service setup
+
+## v4.5.4 (2016-05-31)
+
+- Updated the systemd unit file to restart on failure and added exit status 3 as a valid successful exit status
+- Added the ability to specify retries, retry_delay, timeout in the chef gem install hash
+
+## v4.5.3 (2016-05-27)
+
+- Fixed idempotency of the windows task recipe
+
+## v4.5.2 (2016-05-20)
+
+- Revert switching to ruby based which as this broke compatibility with older Chef clients
+- Resolved deprecation warnings with chef_gem installs
+
+## v4.5.1 (2016-05-19)
+
+- Switch from command line which to pure Ruby which in the helper for finding chef-client
+- Removed the last bit of Chef 10 compatibility code
+- Updated file modes in resources so we properly set the leading 0s
+- Switched Travis CI testing to kitchen-dokken and expanded the platforms / suites that are tested
+- Added additional service Chefspecs
+
 ## v4.5.0 (2016-04-26)
 
 - Updated the client.rb to use ChefConfig::Config.from_file to load config files on Chef 12.4.0\. This resolves NameError messages when running Ohai on its own.

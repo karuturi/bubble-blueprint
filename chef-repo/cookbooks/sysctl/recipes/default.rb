@@ -21,8 +21,7 @@
 
 include_recipe 'sysctl::service'
 
-directory 'Sysctl config directory' do
-  path node['sysctl']['conf_dir']
+directory node['sysctl']['conf_dir'] do
   owner 'root'
   group 'root'
   mode 0755

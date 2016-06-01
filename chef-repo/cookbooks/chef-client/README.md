@@ -15,6 +15,7 @@ The following platforms are tested directly under test-kitchen; see .kitchen.yml
 - Debian 7.9, 8.2
 - Fedora 22, 23
 - FreeBSD 9.3, 10.2
+- openSUSE 13.2
 - Windows 2008 R2 / Windows 2012 R2
 
 The following platforms are known to work:
@@ -29,6 +30,7 @@ The following platforms are known to work:
 - Mac OS X Server
 - Microsoft Windows (7, 8, 2008, 2008 R2, 2012, 2012 R2)
 - AIX (6.1, 7.1)
+- openSUSE Leap / SUSE Linux Enterprises
 
 Other platforms may work with or without modification. Most notably, attribute modification may be required.
 
@@ -153,6 +155,7 @@ Use this recipe on systems that should have a `chef-client` daemon running, such
 - `daemontools` - sets up the service under daemontools, supported on debian, ubuntu and arch
 - `launchd` - sets up the service under launchd, supported on Mac OS X & Mac OS X Server.
 - `bsd` - prints a message about how to update BSD systems to enable the chef-client service, supported on Free/OpenBSD.
+- `systemd` - sets up the service under systemd. Supported on systemd based distros.
 
 ### default
 

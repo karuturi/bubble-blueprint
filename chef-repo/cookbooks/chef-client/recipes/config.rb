@@ -60,10 +60,14 @@ chef_requires = []
 node['chef_client']['load_gems'].each do |gem_name, gem_info_hash|
   gem_info_hash ||= {}
   chef_gem gem_name do
+    compile_time true if Chef::Resource::ChefGem.method_defined?(:compile_time)
     action gem_info_hash[:action] || :install
     source gem_info_hash[:source] if gem_info_hash[:source]
     version gem_info_hash[:version] if gem_info_hash[:version]
     options gem_info_hash[:options] if gem_info_hash[:options]
+    retries gem_info_hash[:retries] if gem_info_hash[:retries]
+    retry_delay gem_info_hash[:retry_delay] if gem_info_hash[:retry_delay]
+    timeout gem_info_hash[:timeout] if gem_info_hash[:timeout]
   end
   chef_requires.push(gem_info_hash[:require_name] || gem_name)
 end
@@ -71,12 +75,11 @@ end
 # We need to set these local variables because the methods aren't
 # available in the Chef::Resource scope
 d_owner = root_owner
-d_group = node['root_group']
 
 template "#{node['chef_client']['conf_dir']}/client.rb" do
   source 'client.rb.erb'
   owner d_owner
-  group d_group
+  group node['root_group']
   mode 00644
   variables(
     chef_config: node['chef_client']['config'],
@@ -96,7 +99,7 @@ end
 directory ::File.join(node['chef_client']['conf_dir'], 'client.d') do
   recursive true
   owner d_owner
-  group d_group
+  group node['root_group']
   mode 00755
 end
 

@@ -4,7 +4,7 @@
 # Cookbook Name:: chef-client
 # Attributes:: default
 #
-# Copyright 2008-2015, Chef Software, Inc.
+# Copyright 2008-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -111,7 +111,7 @@ when 'debian'
   default['chef_client']['cache_path']  = '/var/cache/chef'
   default['chef_client']['backup_path'] = '/var/lib/chef'
 when 'suse'
-  default['chef_client']['init_style']  = 'init'
+  default['chef_client']['init_style']  = 'systemd'
   default['chef_client']['run_path']    = '/var/run/chef'
   default['chef_client']['cache_path']  = '/var/cache/chef'
   default['chef_client']['backup_path'] = '/var/lib/chef'
