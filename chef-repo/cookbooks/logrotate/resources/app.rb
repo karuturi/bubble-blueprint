@@ -18,6 +18,8 @@ resource_name :logrotate_app
 
 property :path, [String, Array], required: true
 property :frequency, String, default: "weekly"
+property :cookbook, default: "logrotate"
+property :template_name, default: "logrotate.erb"
 property :template_mode, default: "0644"
 property :template_owner, default: "root"
 property :template_group, default: "root"
@@ -63,8 +65,8 @@ action :enable do
   end
 
   template "#{new_resource.base_dir}/#{new_resource.name}" do
-    source   "logrotate.erb"
-    cookbook "logrotate"
+    source   new_resource.template_name
+    cookbook new_resource.cookbook
     mode     new_resource.template_mode
     owner    new_resource.template_owner
     group    new_resource.template_group
@@ -103,7 +105,7 @@ def handle_options(new_resource)
   opts = if new_resource.options.is_a?(Array)
            new_resource.options.dup
          else
-           new_reosurce.options.split
+           new_resource.options.split
          end
 
   if new_resource.sharedscripts

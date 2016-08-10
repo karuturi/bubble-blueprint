@@ -1,4 +1,5 @@
 # sudo cookbook
+
 [![Build Status](https://travis-ci.org/chef-cookbooks/sudo.svg?branch=master)](http://travis-ci.org/chef-cookbooks/sudo) [![Cookbook Version](https://img.shields.io/cookbook/v/sudo.svg)](https://supermarket.chef.io/cookbooks/sudo)
 
 The Chef `sudo` cookbook installs the `sudo` package and configures the `/etc/sudoers` file.
@@ -6,16 +7,20 @@ The Chef `sudo` cookbook installs the `sudo` package and configures the `/etc/su
 It also exposes an LWRP for adding and managing sudoers.
 
 ## Requirements
+
 ### Platforms
+
 - Debian/Ubuntu
 - RHEL/CentOS/Scientific/Amazon/Oracle
 - FreeBSD
 - Mac OS X
+- openSUSE / Suse
 
 ### Chef
 - Chef 11+
 
 ### Cookbooks
+
 - None
 
 ## Attributes
@@ -151,7 +156,7 @@ There are two ways for rendering a sudoer-fragment using this LWRP:
 1. Using the built-in template
 2. Using a custom, cookbook-level template
 
-Both methods will create the `/etc/sudoers.d/#{username}` file with the correct permissions.
+Both methods will create the `/etc/sudoers.d/#{resourcename}` file with the correct permissions.
 
 The LWRP also performs **fragment validation**. If a sudoer-fragment is not valid, the Chef run will throw an exception and fail. This ensures that your sudoers file is always valid and cannot become corrupt (from this cookbook).
 
@@ -215,6 +220,12 @@ case it is not already</td>
     <tr>
       <td>nopasswd</td>
       <td>supply a password to invoke sudo</td>
+      <td><tt>true</tt></td>
+      <td><tt>false</tt></td>
+    </tr>
+    <tr>
+      <td>noexec</td>
+      <td>prevents commands from shelling out</td>
       <td><tt>true</tt></td>
       <td><tt>false</tt></td>
     </tr>

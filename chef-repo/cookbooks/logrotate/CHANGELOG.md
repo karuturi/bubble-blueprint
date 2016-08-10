@@ -3,6 +3,21 @@ logrotate Cookbook CHANGELOG
 This file is used to list changes made in each version of the
 logrotate cookbook.
 
+v2.1.0
+------
+
+# Bug Fixes
+
+- Restore `cookbook` parameter for `logrotate_app` resource due to
+  popular demand.
+
+- Add a `template_name` parameter to replace the 1.x `template`
+  parameter. The name `template` can't be used inside a resource
+  without conflicting with an attribute of the same name.
+
+- Fix exception when `options` specified as a string rather than an
+  array
+
 v2.0.0
 ------
 

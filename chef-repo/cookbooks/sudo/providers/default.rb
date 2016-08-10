@@ -20,6 +20,8 @@
 # limitations under the License.
 #
 
+use_inline_resources
+
 # This LWRP supports whyrun mode
 def whyrun_supported?
   true
@@ -87,6 +89,7 @@ def render_sudoer
                 host:               new_resource.host,
                 runas:              new_resource.runas,
                 nopasswd:           new_resource.nopasswd,
+                noexec:             new_resource.noexec,
                 commands:           new_resource.commands,
                 command_aliases:    new_resource.command_aliases,
                 defaults:           new_resource.defaults,
@@ -115,6 +118,7 @@ action :install do
     sudoers_dir.run_action(:create)
   end
 
+  Chef::Log.warn("#{sudo_filename} will be rendered, but will not take effect because node['authorization']['sudo']['include_sudoers_d'] is set to false!") unless node['authorization']['sudo']['include_sudoers_d']
   new_resource.updated_by_last_action(true) if render_sudoer
 end
 
