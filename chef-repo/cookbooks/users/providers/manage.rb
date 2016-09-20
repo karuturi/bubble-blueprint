@@ -3,7 +3,7 @@
 # Provider:: manage
 #
 # Copyright 2011, Eric G. Wolfe
-# Copyright 2009-2015, Chef Software, Inc.
+# Copyright 2009-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ action :create do
       password u['password'] if u['password']
       salt u['salt'] if u['salt']
       iterations u['iterations'] if u['iterations']
-      supports manage_home: manage_home
+      manage_home manage_home
       home home_dir
       action u['action'] if u['action']
     end
@@ -97,6 +97,7 @@ action :create do
       Chef::Log.debug("Managing home files for #{u['username']}")
 
       directory "#{home_dir}/.ssh" do
+        recursive true
         owner u['uid'] ? validate_id(u['uid']) : u['username']
         group validate_id(u['gid']) if u['gid']
         mode '0700'
