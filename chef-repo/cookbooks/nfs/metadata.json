@@ -45,7 +45,7 @@
   "recipes": {
 
   },
-  "version": "2.2.10",
+  "version": "2.2.11",
   "source_url": "https://github.com/atomic-penguin/cookbook-nfs",
   "issues_url": "https://github.com/atomic-penguin/cookbook-nfs/issues",
   "privacy": false,
