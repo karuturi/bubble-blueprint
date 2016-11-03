@@ -29,9 +29,9 @@ The runit cookbook can be used with this cookbook but it is not explicitly requi
 
 Cron is a dependency, for default behavior of the `cron` recipe to work. This is a dependency because `cron` is cross platform, and doesn't carry additional dependencies, unlike the other cookbooks listed above.
 
-- cron 1.2.0+
-- logrotate 1.2.0+
-- windows 1.39.0+
+- cron 1.7.0+
+- logrotate 1.9.0+
+- windows 1.42.0+
 
 See [USAGE](#usage).
 
@@ -50,6 +50,7 @@ The following attributes affect the behavior of the chef-client program when run
 - `node['chef_client']['bin']` - Sets the full path to the `chef-client` binary. Mainly used to set a specific path if multiple versions of chef-client exist on a system or the bin has been installed in a non-sane path. Default "/usr/bin/chef-client".
 - `node['chef_client']['cron']['minute']` - The minute that chef-client will run as a cron task, only applicable if you set `'cron'` as the `'init_style'`
 - `node['chef_client']['cron']['hour']` - The hour that chef-client will run as a cron task, only applicable if you set `'cron'` as the `'init_style'`
+- `node['chef_client']['cron']['weekday']` - The weekday that chef-client will run as a cron task, only applicable if you set `'cron'` as the `'init_style'`
 - `node['chef_client']['cron']['environment_variables']` - Environment variables to pass to chef-client's execution (e.g. `SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt` chef-client)
 - `node['chef_client']['cron']['log_file']` - Location to capture the
 - `node['chef_client']['cron']['append_log']` - Whether to append to the log. Default: `false` chef-client output.
@@ -126,10 +127,9 @@ Use this recipe on systems that should have a `chef-client` daemon running, such
 
 - `init` - uses the init script included in this cookbook, supported on debian and redhat family distributions.
 - `upstart` - uses the upstart job included in this cookbook, supported on ubuntu.
-- `arch` - uses the init script included in this cookbook for ArchLinux, supported on arch.
 - `runit` - sets up the service under runit, supported on ubuntu, debian, redhat family distributions, and gentoo.
 - `launchd` - sets up the service under launchd, supported on Mac OS X & Mac OS X Server.
-- `bsd` - prints a message about how to update BSD systems to enable the chef-client service, supported on Free/OpenBSD.
+- `bsd` - prints a message about how to update BSD systems to enable the chef-client service.
 - `systemd` - sets up the service under systemd. Supported on systemd based distros.
 
 ### default
